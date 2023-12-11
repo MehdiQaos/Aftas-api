@@ -5,10 +5,7 @@ import dev.mehdi.aftas.dto.fish.FishResponseDto;
 import dev.mehdi.aftas.service.FishService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,16 +17,16 @@ public class FishController {
 
     @GetMapping
     ResponseEntity<List<FishResponseDto>> All() {
-        List<FishResponseDto> fishResponseDtos = fishService.findAll()
+        List<FishResponseDto> fishResponseDto = fishService.findAll()
             .stream()
             .map(FishResponseDto::fromModel)
             .toList();
 
-        return ResponseEntity.ok().body(fishResponseDtos);
+        return ResponseEntity.ok().body(fishResponseDto);
     }
 
-    @GetMapping("/{id}")
-    ResponseEntity<FishResponseDto> one(@RequestParam Long id) {
+    @GetMapping("{id}")
+    ResponseEntity<FishResponseDto> one(@PathVariable Long id) {
         Fish fish = fishService.findById(id).orElseThrow();
         FishResponseDto fishResponseDto = FishResponseDto.fromModel(fish);
         return ResponseEntity.ok().body(fishResponseDto);

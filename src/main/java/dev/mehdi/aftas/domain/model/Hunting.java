@@ -13,7 +13,7 @@ public class Hunting {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer numberOfFish;
+    private Integer numberOfFishes;
 
     @ManyToOne
     private Fish fish;

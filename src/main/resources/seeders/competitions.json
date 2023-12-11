@@ -1,0 +1,239 @@
+[
+  {
+    "code": "CAS-22-11-01",
+    "date": "22-11-01",
+    "startTime": "10:00:00",
+    "endTime": "15:00:00",
+    "location": "Casablanca",
+    "memberHuntings": {
+      "1": [
+        {
+          "numberOfFishes": 5,
+          "fishId": 3
+        },
+        {
+          "numberOfFishes": 8,
+          "fishId": 7
+        }
+      ],
+      "2": [
+        {
+          "numberOfFishes": 3,
+          "fishId": 2
+        },
+        {
+          "numberOfFishes": 6,
+          "fishId": 9
+        }
+      ],
+      "3": [
+        {
+          "numberOfFishes": 1,
+          "fishId": 4
+        },
+        {
+          "numberOfFishes": 10,
+          "fishId": 6
+        }
+      ],
+      "4": [
+        {
+          "numberOfFishes": 7,
+          "fishId": 1
+        },
+        {
+          "numberOfFishes": 4,
+          "fishId": 8
+        }
+      ],
+      "5": [
+        {
+          "numberOfFishes": 2,
+          "fishId": 5
+        },
+        {
+          "numberOfFishes": 9,
+          "fishId": 10
+        }
+      ],
+      "6": [
+        {
+          "numberOfFishes": 6,
+          "fishId": 4
+        },
+        {
+          "numberOfFishes": 1,
+          "fishId": 2
+        }
+      ],
+      "7": [
+        {
+          "numberOfFishes": 10,
+          "fishId": 9
+        },
+        {
+          "numberOfFishes": 3,
+          "fishId": 5
+        }
+      ]
+    }
+  },
+  {
+    "code": "RAB-22-10-01",
+    "date": "22-10-01",
+    "startTime": "08:30:00",
+    "endTime": "14:00:00",
+    "location": "Rabat",
+    "memberHuntings": {
+      "1": [
+        {
+          "numberOfFishes": 4,
+          "fishId": 2
+        },
+        {
+          "numberOfFishes": 7,
+          "fishId": 5
+        }
+      ],
+      "2": [
+        {
+          "numberOfFishes": 2,
+          "fishId": 8
+        },
+        {
+          "numberOfFishes": 5,
+          "fishId": 1
+        }
+      ],
+      "3": [
+        {
+          "numberOfFishes": 8,
+          "fishId": 3
+        },
+        {
+          "numberOfFishes": 3,
+          "fishId": 6
+        }
+      ],
+      "4": [
+        {
+          "numberOfFishes": 1,
+          "fishId": 4
+        },
+        {
+          "numberOfFishes": 6,
+          "fishId": 9
+        }
+      ],
+      "5": [
+        {
+          "numberOfFishes": 5,
+          "fishId": 10
+        },
+        {
+          "numberOfFishes": 2,
+          "fishId": 7
+        }
+      ],
+      "6": [
+        {
+          "numberOfFishes": 3,
+          "fishId": 1
+        },
+        {
+          "numberOfFishes": 8,
+          "fishId": 4
+        }
+      ],
+      "7": [
+        {
+          "numberOfFishes": 7,
+          "fishId": 9
+        },
+        {
+          "numberOfFishes": 4,
+          "fishId": 5
+        }
+      ]
+    }
+  },
+  {
+    "code": "FES-22-09-15",
+    "date": "22-09-15",
+    "startTime": "09:00:00",
+    "endTime": "13:30:00",
+    "location": "Fes",
+    "memberHuntings": {
+      "1": [
+        {
+          "numberOfFishes": 3,
+          "fishId": 6
+        },
+        {
+          "numberOfFishes": 7,
+          "fishId": 1
+        }
+      ],
+      "2": [
+        {
+          "numberOfFishes": 5,
+          "fishId": 8
+        },
+        {
+          "numberOfFishes": 2,
+          "fishId": 3
+        }
+      ],
+      "3": [
+        {
+          "numberOfFishes": 9,
+          "fishId": 4
+        },
+        {
+          "numberOfFishes": 1,
+          "fishId": 10
+        }
+      ],
+      "4": [
+        {
+          "numberOfFishes": 4,
+          "fishId": 2
+        },
+        {
+          "numberOfFishes": 6,
+          "fishId": 9
+        }
+      ],
+      "5": [
+        {
+          "numberOfFishes": 2,
+          "fishId": 5
+        },
+        {
+          "numberOfFishes": 8,
+          "fishId": 7
+        }
+      ],
+      "6": [
+        {
+          "numberOfFishes": 3,
+          "fishId": 1
+        },
+        {
+          "numberOfFishes": 7,
+          "fishId": 4
+        }
+      ],
+      "7": [
+        {
+          "numberOfFishes": 6,
+          "fishId": 9
+        },
+        {
+          "numberOfFishes": 3,
+          "fishId": 5
+        }
+      ]
+    }
+  }
+]

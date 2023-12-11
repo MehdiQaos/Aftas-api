@@ -1,0 +1,82 @@
+[
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "nationality": "USA",
+    "birthDate": "1990-05-15",
+    "identityNumber": "123456789",
+    "identityDocumentTypeId": 1
+  },
+  {
+    "firstName": "Alice",
+    "lastName": "Smith",
+    "nationality": "Canada",
+    "birthDate": "1985-10-20",
+    "identityNumber": "987654321",
+    "identityDocumentTypeId": 2
+  },
+  {
+    "firstName": "Bob",
+    "lastName": "Johnson",
+    "nationality": "UK",
+    "birthDate": "1995-02-28",
+    "identityNumber": "555666777",
+    "identityDocumentTypeId": 0
+  },
+  {
+    "firstName": "Emily",
+    "lastName": "Brown",
+    "nationality": "Australia",
+    "birthDate": "1988-07-12",
+    "identityNumber": "333444555",
+    "identityDocumentTypeId": 1
+  },
+  {
+    "firstName": "Michael",
+    "lastName": "Lee",
+    "nationality": "New Zealand",
+    "birthDate": "1992-03-05",
+    "identityNumber": "111222333",
+    "identityDocumentTypeId": 2
+  },
+  {
+    "firstName": "Sophia",
+    "lastName": "Miller",
+    "nationality": "France",
+    "birthDate": "1993-09-18",
+    "identityNumber": "789012345",
+    "identityDocumentTypeId": 0
+  },
+  {
+    "firstName": "Daniel",
+    "lastName": "Garcia",
+    "nationality": "Spain",
+    "birthDate": "1987-12-25",
+    "identityNumber": "456789012",
+    "identityDocumentTypeId": 1
+  },
+  {
+    "firstName": "Olivia",
+    "lastName": "Brown",
+    "nationality": "Germany",
+    "birthDate": "1991-06-30",
+    "identityNumber": "234567890",
+    "identityDocumentTypeId": 2
+  },
+  {
+    "firstName": "Ethan",
+    "lastName": "Wang",
+    "nationality": "China",
+    "birthDate": "1989-04-08",
+    "identityNumber": "901234567",
+    "identityDocumentTypeId": 0
+  },
+  {
+    "firstName": "Ava",
+    "lastName": "Kim",
+    "nationality": "South Korea",
+    "birthDate": "1994-11-15",
+    "identityNumber": "678901234",
+    "identityDocumentTypeId": 1
+  }
+]

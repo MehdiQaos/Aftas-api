@@ -11,5 +11,4 @@ import java.util.Optional;
 public interface LevelRepository extends JpaRepository<Level, Long> {
     Optional<Level> findByLevel(Integer level);
     Optional<Level> findByPoints(Integer points);
-//    List<Level> saveAll(Level[] levels);
 }
