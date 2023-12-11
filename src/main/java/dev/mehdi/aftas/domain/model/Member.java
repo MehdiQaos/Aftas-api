@@ -2,30 +2,44 @@ package dev.mehdi.aftas.domain.model;
 
 import dev.mehdi.aftas.domain.enums.IdentityDocumentType;
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter @Setter
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String firstName;
+
     private String lastName;
+
     private String identityNumber;
+
     private String nationality;
+
     private LocalDate birthDate;
+
     @Enumerated(EnumType.STRING)
     private IdentityDocumentType identityDocument;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
+
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-    @ManyToMany
-    Set<Competition> competitions;
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    private final Set<Ranking> rankings = new HashSet<>();
 }

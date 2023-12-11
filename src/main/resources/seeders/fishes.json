@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Largemouth Bass",
+    "averageWeight": 2.5,
+    "levelId": 1
+  },
+  {
+    "name": "Smallmouth Bass",
+    "averageWeight": 2.0,
+    "levelId": 2
+  },
+  {
+    "name": "Rainbow Trout",
+    "averageWeight": 1.0,
+    "levelId": 3
+  },
+  {
+    "name": "Brown Trout",
+    "averageWeight": 1.5,
+    "levelId": 4
+  },
+  {
+    "name": "Brook Trout",
+    "averageWeight": 1.2,
+    "levelId": 5
+  },
+  {
+    "name": "Walleye",
+    "averageWeight": 3.0,
+    "levelId": 1
+  },
+  {
+    "name": "Chinook Salmon",
+    "averageWeight": 8.0,
+    "levelId": 2
+  },
+  {
+    "name": "Coho Salmon",
+    "averageWeight": 5.0,
+    "levelId": 3
+  },
+  {
+    "name": "Muskie",
+    "averageWeight": 15.0,
+    "levelId": 4
+  },
+  {
+    "name": "Northern Pike",
+    "averageWeight": 4.0,
+    "levelId": 5
+  },
+  {
+    "name": "Redfish",
+    "averageWeight": 3.5,
+    "levelId": 1
+  },
+  {
+    "name": "Snook",
+    "averageWeight": 6.0,
+    "levelId": 2
+  },
+  {
+    "name": "Flounder",
+    "averageWeight": 1.8,
+    "levelId": 3
+  },
+  {
+    "name": "Tarpon",
+    "averageWeight": 30.0,
+    "levelId": 4
+  }
+]
