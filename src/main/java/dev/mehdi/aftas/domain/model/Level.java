@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,5 +27,5 @@ public class Level {
     private Integer points;
 
     @OneToMany(mappedBy = "level", fetch = FetchType.LAZY)
-    private final Set<Fish> fishes = new HashSet<>();
+    private final List<Fish> fishes = new ArrayList<>();
 }

@@ -5,7 +5,9 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,6 +30,23 @@ public class Competition {
 
     private String location;
 
-    @OneToMany(mappedBy = "competition", fetch = FetchType.LAZY)
-    private final Set<Ranking> rankings = new HashSet<>();
+    @OneToMany(mappedBy = "competition", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private final List<Ranking> rankings = new ArrayList<>();
+
+    public void addRanking(Ranking ranking) {
+        rankings.add(ranking);
+        ranking.setCompetition(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Competition{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", date=" + date +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", location='" + location + '\'' +
+                '}';
+    }
 }

@@ -1,7 +1,10 @@
 package dev.mehdi.aftas.dto.fish;
 
 import dev.mehdi.aftas.domain.model.Fish;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @AllArgsConstructor
@@ -10,12 +13,15 @@ import lombok.*;
 @Getter @Setter
 public class FishRequestDto {
     @NotBlank(message = "Name is required")
+    @Size(max = 100, message = "Name cannot be longer than 100 characters")
     private String name;
 
-    @NotBlank(message = "Average weight is required")
-    private Long averageWeight;
+    @NotNull(message = "Average weight is required")
+    @Min(value = 1, message = "Average weight must be greater than 0")
+    private Float averageWeight;
 
-    @NotBlank(message = "Level id is required")
+    @NotNull(message = "Level id is required")
+    @Min(value = 1, message = "Level id must be greater than or equal to 1")
     private Long levelId;
 
     public static Fish toFish(FishRequestDto fishRequestDto) {

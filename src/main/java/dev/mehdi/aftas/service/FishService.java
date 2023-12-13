@@ -10,6 +10,7 @@ public interface FishService {
     List<Fish> findAll();
     Optional<Fish> findById(Long id);
     Optional<Fish> findByName(String name);
-    Optional<Fish> save(Fish fish);
-    List<Fish> saveAll(List<FishRequestDto> fishsDto);
+    Fish save(Fish fish);
+    Fish save(FishRequestDto fishDto);
+    List<Fish> saveAll(List<FishRequestDto> fishesDto);
 }

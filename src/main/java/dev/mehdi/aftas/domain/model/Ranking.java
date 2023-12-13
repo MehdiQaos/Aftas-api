@@ -3,8 +3,8 @@ package dev.mehdi.aftas.domain.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -12,21 +12,36 @@ import java.util.Set;
 @Builder
 @Getter @Setter
 public class Ranking {
-    @EmbeddedId
-    private RankingId id;
+//    @EmbeddedId
+//    private RankingId id;
+//
+//    @ManyToOne
+//    @MapsId("memberId")
+//    private Member member;
+//
+//    @ManyToOne
+//    @MapsId("competitionId")
+//    private Competition competition;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
-    @MapsId("memberId")
     private Member member;
 
     @ManyToOne
-    @MapsId("competitionId")
     private Competition competition;
 
     private Integer score;
 
     private Integer memberRank;
 
-    @OneToMany(mappedBy = "ranking", fetch = FetchType.LAZY)
-    private final Set<Hunting> huntings = new HashSet<>();
+    @OneToMany(mappedBy = "ranking", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private final List<Hunting> huntings = new ArrayList<>();
+
+    public void addHunting(Hunting hunting) {
+        huntings.add(hunting);
+        hunting.setRanking(this);
+    }
 }

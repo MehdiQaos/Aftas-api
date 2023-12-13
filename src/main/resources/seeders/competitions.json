@@ -1,7 +1,7 @@
 [
   {
     "code": "CAS-22-11-01",
-    "date": "22-11-01",
+    "date": "2022-11-01",
     "startTime": "10:00:00",
     "endTime": "15:00:00",
     "location": "Casablanca",
@@ -80,7 +80,7 @@
   },
   {
     "code": "RAB-22-10-01",
-    "date": "22-10-01",
+    "date": "2022-10-01",
     "startTime": "08:30:00",
     "endTime": "14:00:00",
     "location": "Rabat",
@@ -159,7 +159,7 @@
   },
   {
     "code": "FES-22-09-15",
-    "date": "22-09-15",
+    "date": "2022-09-15",
     "startTime": "09:00:00",
     "endTime": "13:30:00",
     "location": "Fes",

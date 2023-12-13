@@ -30,13 +30,24 @@ public class FishServiceImpl implements FishService {
         return fishRepository.findByName(name);
     }
 
-    public Optional<Fish> save(Fish fish) { //TODO: check if fish already exists
+    @Override
+    public Fish save(Fish fish) {
         String fishName = fish.getName();
 
-        if (findByName(fishName).isPresent())
-            return Optional.empty();
+        if (findByName(fish.getName()).isPresent())
+            throw new ResourceNotFoundException("Fish by same name already exists");
 
-        return Optional.of(fishRepository.save(fish));
+        return fishRepository.save(fish);
+    }
+
+    @Override
+    public Fish save(FishRequestDto fishDto) {
+        Fish fish = FishRequestDto.toFish(fishDto);
+        Level level = levelService.findById(fishDto.getLevelId()).orElseThrow(
+                () -> new ResourceNotFoundException("Level not found")
+        );
+        fish.setLevel(level);
+        return save(fish);
     }
 
     @Override

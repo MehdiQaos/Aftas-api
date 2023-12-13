@@ -12,7 +12,7 @@ import lombok.Setter;
 public class FishResponseDto {
     private Long id;
     private String name;
-    private Long averageWeight;
+    private Float averageWeight;
 
     public static FishResponseDto fromModel(Fish fish) {
         return new FishResponseDto(
