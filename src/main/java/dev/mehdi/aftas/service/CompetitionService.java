@@ -18,4 +18,5 @@ public interface CompetitionService {
     Ranking registerMember(Long competitionId, Long memberId);
     List<Competition> saveAll(List<Competition> competitions);
     List<Competition> saveCompetitionHuntingAll(List<CompetitionHuntingsDto> competitions);
+    Competition deleteById(Long id);
 }

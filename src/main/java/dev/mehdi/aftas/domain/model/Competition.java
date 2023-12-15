@@ -30,7 +30,12 @@ public class Competition {
 
     private String location;
 
-    @OneToMany(mappedBy = "competition", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "competition",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private final List<Ranking> rankings = new ArrayList<>();
 
     public void addRanking(Ranking ranking) {

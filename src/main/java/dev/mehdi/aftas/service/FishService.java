@@ -13,4 +13,7 @@ public interface FishService {
     Fish save(Fish fish);
     Fish save(FishRequestDto fishDto);
     List<Fish> saveAll(List<FishRequestDto> fishesDto);
+    Fish deleteById(Long id);
+
+    Fish update(Long id, FishRequestDto fishDto);
 }

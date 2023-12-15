@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/competition")
+@RequestMapping("/api/competition")
 @RequiredArgsConstructor
 public class CompetitionController {
 
@@ -67,7 +67,13 @@ public class CompetitionController {
             @RequestBody @Valid HuntingRequestDto huntingDto) {
 
         Hunting hunting = huntingService.addHunt(huntingDto);
-//        return ResponseEntity.created().body(hunting.getNumberOfFishes());
         return new ResponseEntity<>(hunting.getNumberOfFishes(), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("{id}")
+    ResponseEntity<CompetitionResponseDto> delete(@PathVariable Long id) {
+        Competition competition = competitionService.deleteById(id);
+        CompetitionResponseDto body = CompetitionResponseDto.from(competition);
+        return ResponseEntity.ok(body);
     }
 }

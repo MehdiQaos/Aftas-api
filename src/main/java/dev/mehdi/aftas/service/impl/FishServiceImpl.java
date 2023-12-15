@@ -3,6 +3,7 @@ package dev.mehdi.aftas.service.impl;
 import dev.mehdi.aftas.domain.model.Fish;
 import dev.mehdi.aftas.domain.model.Level;
 import dev.mehdi.aftas.dto.fish.FishRequestDto;
+import dev.mehdi.aftas.exception.ResourceExistException;
 import dev.mehdi.aftas.exception.ResourceNotFoundException;
 import dev.mehdi.aftas.repository.FishRepository;
 import dev.mehdi.aftas.service.FishService;
@@ -18,6 +19,7 @@ import java.util.Optional;
 public class FishServiceImpl implements FishService {
     private final FishRepository fishRepository;
     private final LevelService levelService;
+
     public List<Fish> findAll() {
         return fishRepository.findAll();
     }
@@ -35,7 +37,7 @@ public class FishServiceImpl implements FishService {
         String fishName = fish.getName();
 
         if (findByName(fish.getName()).isPresent())
-            throw new ResourceNotFoundException("Fish by same name already exists");
+            throw new ResourceExistException("Fish by same name already exists");
 
         return fishRepository.save(fish);
     }
@@ -64,5 +66,35 @@ public class FishServiceImpl implements FishService {
                 })
                 .toList();
         return fishRepository.saveAll(fishes);
+    }
+
+    @Override
+    public Fish deleteById(Long id) {
+        Fish fish = findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Fish not found with id: " + id)
+        );
+        fishRepository.delete(fish);
+        return fish;
+    }
+
+    @Override
+    public Fish update(Long id, FishRequestDto fishDto) {
+        Fish existingFish = findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("Fish not found with id: " + id)
+        );
+
+        Optional<Fish> fishWithNewName = findByName(fishDto.getName());
+        if (fishWithNewName.isPresent() && !fishWithNewName.get().getId().equals(id)) {
+            throw new ResourceExistException("Fish with name " + fishDto.getName() + " already exists");
+        }
+
+        Fish updatedFish = FishRequestDto.toFish(fishDto);
+        Level level = levelService.findById(fishDto.getLevelId()).orElseThrow(
+                () -> new ResourceNotFoundException("Level not found")
+        );
+        updatedFish.setLevel(level);
+        updatedFish.setId(existingFish.getId()); // preserve the id
+
+        return fishRepository.save(updatedFish);
     }
 }

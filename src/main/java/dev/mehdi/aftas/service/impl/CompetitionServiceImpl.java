@@ -154,4 +154,12 @@ public class CompetitionServiceImpl implements CompetitionService {
 
         return competitions;
     }
+
+    @Override
+    public Competition deleteById(Long id) {
+        Competition competition = findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Competition not found with id: " + id));
+        competitionRepository.delete(competition);
+        return competition;
+    }
 }
