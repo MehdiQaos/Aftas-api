@@ -10,6 +10,8 @@ import dev.mehdi.aftas.service.CompetitionService;
 import dev.mehdi.aftas.service.HuntingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,14 +26,24 @@ public class CompetitionController {
     private final CompetitionService competitionService;
     private final HuntingService huntingService;
 
-    @GetMapping
-    ResponseEntity<List<CompetitionResponseDto>> all() {
-        List<Competition> competitions = competitionService.findAll();
-        List<CompetitionResponseDto> body = competitions.stream()
-                .map(CompetitionResponseDto::from)
-                .toList();
+//    @GetMapping
+//    ResponseEntity<List<CompetitionResponseDto>> all() {
+//        List<Competition> competitions = competitionService.findAll();
+//        List<CompetitionResponseDto> body = competitions.stream()
+//                .map(CompetitionResponseDto::from)
+//                .toList();
+//
+//        return ResponseEntity.ok(body);
+//    }
 
-        return ResponseEntity.ok(body);
+    @GetMapping
+    ResponseEntity<Page<CompetitionResponseDto>> all(Pageable pageable) {
+        Page<Competition> competitionsPage =
+                competitionService.findAllWithPaginationAndSorting(pageable);
+        Page<CompetitionResponseDto> competitionsDtoPage =
+                competitionsPage.map(CompetitionResponseDto::from);
+
+        return ResponseEntity.ok(competitionsDtoPage);
     }
 
     @GetMapping("{id}")
@@ -55,8 +67,9 @@ public class CompetitionController {
     }
 
     @GetMapping("{competitionId}/{memberId}")
-    ResponseEntity<Boolean> registerMember(@PathVariable Long competitionId,
-            @PathVariable Long memberId) {
+    ResponseEntity<Boolean> registerMember(
+            @PathVariable Long competitionId, @PathVariable Long memberId
+    ) {
 
         competitionService.registerMember(competitionId, memberId);
         return ResponseEntity.ok(true);
@@ -64,7 +77,7 @@ public class CompetitionController {
 
     @PostMapping("{id}")
     ResponseEntity<Integer> addHunting(@PathVariable Long id,
-            @RequestBody @Valid HuntingRequestDto huntingDto) {
+                                       @RequestBody @Valid HuntingRequestDto huntingDto) {
 
         Hunting hunting = huntingService.addHunt(huntingDto);
         return new ResponseEntity<>(hunting.getNumberOfFishes(), HttpStatus.CREATED);
@@ -74,6 +87,13 @@ public class CompetitionController {
     ResponseEntity<CompetitionResponseDto> delete(@PathVariable Long id) {
         Competition competition = competitionService.deleteById(id);
         CompetitionResponseDto body = CompetitionResponseDto.from(competition);
+        return ResponseEntity.ok(body);
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<CompetitionResponseDto> update(@PathVariable Long id, @RequestBody @Valid CompetitionRequestDto competitionDto) {
+        Competition updatedCompetition = competitionService.update(id, competitionDto);
+        CompetitionResponseDto body = CompetitionResponseDto.from(updatedCompetition);
         return ResponseEntity.ok(body);
     }
 }

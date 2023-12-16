@@ -9,6 +9,8 @@ import dev.mehdi.aftas.repository.FishRepository;
 import dev.mehdi.aftas.service.FishService;
 import dev.mehdi.aftas.service.LevelService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +24,11 @@ public class FishServiceImpl implements FishService {
 
     public List<Fish> findAll() {
         return fishRepository.findAll();
+    }
+
+    @Override
+    public Page<Fish> findAllWithPaginationAndSorting(Pageable pageable) {
+        return fishRepository.findAll(pageable);
     }
 
     public Optional<Fish> findById(Long id) {

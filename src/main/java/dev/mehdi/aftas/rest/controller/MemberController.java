@@ -7,6 +7,8 @@ import dev.mehdi.aftas.exception.ResourceNotFoundException;
 import dev.mehdi.aftas.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,14 +20,36 @@ import java.util.List;
 public class MemberController {
     private final MemberService memberService;
 
-    @GetMapping
-    ResponseEntity<List<MemberResponseDto>> All() {
-        List<MemberResponseDto> membersResponseDto = memberService.findAll()
-            .stream()
-            .map(MemberResponseDto::fromMember)
-            .toList();
+//    @GetMapping
+//    ResponseEntity<List<MemberResponseDto>> All(
+//            @RequestParam(required = false) String sortField,
+//            @RequestParam(required = false, defaultValue = "ASC") String sortDirection
+//    ) {
+//        System.out.println(sortField + " " + sortDirection);
+//        List<Member> members;
+//        if (sortField != null) {
+//            Sort.Direction sd = "ASC".equals(sortDirection) ? Sort.Direction.ASC :
+//                    Sort.Direction.DESC;
+//            members = memberService.findAllWithSort(sortField, sd);
+//        } else {
+//            members = memberService.findAll();
+//        }
+//        List<MemberResponseDto> membersResponseDto = members
+//                .stream()
+//                .map(MemberResponseDto::fromMember)
+//                .toList();
+//
+//        return ResponseEntity.ok().body(membersResponseDto);
+//    }
 
-        return ResponseEntity.ok().body(membersResponseDto);
+    @GetMapping
+    ResponseEntity<Page<MemberResponseDto>> AllWithPaginationAndSorting(Pageable pageable) {
+        Page<Member> membersPage =
+                memberService.findAllWithPaginationAndSorting(pageable);
+        Page<MemberResponseDto> membersResponseDtoPage =
+                membersPage.map(MemberResponseDto::fromMember);
+
+        return ResponseEntity.ok().body(membersResponseDtoPage);
     }
 
     @GetMapping("{id}")

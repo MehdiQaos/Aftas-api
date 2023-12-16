@@ -2,6 +2,8 @@ package dev.mehdi.aftas.service;
 
 import dev.mehdi.aftas.domain.model.Member;
 import dev.mehdi.aftas.dto.member.MemberRequestDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +11,7 @@ import java.util.Optional;
 public interface MemberService {
     Optional<Member> findById(Long id);
     List<Member> findAll();
+    Page<Member> findAllWithPaginationAndSorting(Pageable pageable);
     Optional<Member> findByIdentityNumberAndIdentityDocument(Member member);
     Optional<Member> findByFirstNameAndLastName(Member member);
     Member save(Member member);

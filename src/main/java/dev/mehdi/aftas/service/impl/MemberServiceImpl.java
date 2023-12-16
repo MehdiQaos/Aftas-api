@@ -8,6 +8,10 @@ import dev.mehdi.aftas.exception.ResourceNotFoundException;
 import dev.mehdi.aftas.repository.MemberRepository;
 import dev.mehdi.aftas.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +30,11 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public List<Member> findAll() {
         return memberRepository.findAll();
+    }
+
+    @Override
+    public Page<Member> findAllWithPaginationAndSorting(Pageable pageable) {
+        return memberRepository.findAll(pageable);
     }
 
     @Override

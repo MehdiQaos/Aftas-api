@@ -7,6 +7,8 @@ import dev.mehdi.aftas.exception.ResourceNotFoundException;
 import dev.mehdi.aftas.service.FishService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,14 +21,23 @@ import java.util.List;
 public class FishController {
     private final FishService fishService;
 
-    @GetMapping
-    ResponseEntity<List<FishResponseDto>> All() {
-        List<FishResponseDto> fishResponseDto = fishService.findAll()
-                .stream()
-                .map(FishResponseDto::fromModel)
-                .toList();
+//    @GetMapping
+//    ResponseEntity<List<FishResponseDto>> All() {
+//        List<FishResponseDto> fishResponseDto = fishService.findAll()
+//                .stream()
+//                .map(FishResponseDto::fromModel)
+//                .toList();
+//
+//        return ResponseEntity.ok().body(fishResponseDto);
+//    }
 
-        return ResponseEntity.ok().body(fishResponseDto);
+    @GetMapping
+    ResponseEntity<Page<FishResponseDto>> All(Pageable pageable) {
+        Page<Fish> fishesPage = fishService.findAllWithPaginationAndSorting(pageable);
+        Page<FishResponseDto> fishResponseDtoPage =
+                fishesPage.map(FishResponseDto::fromModel);
+
+        return ResponseEntity.ok().body(fishResponseDtoPage);
     }
 
     @GetMapping("{id}")
