@@ -22,11 +22,15 @@ public class Competition {
 
     private LocalDate date;
 
+    private Integer numberOfParticipants;
+
     private LocalTime startTime;
 
     private LocalTime endTime;
 
     private String location;
+
+    private Float amount;
 
     @OneToMany(
             mappedBy = "competition",

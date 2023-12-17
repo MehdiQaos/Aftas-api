@@ -5,6 +5,7 @@
     "startTime": "10:00:00",
     "endTime": "15:00:00",
     "location": "Casablanca",
+    "amount": 10,
     "memberHuntings": {
       "1": [
         {
@@ -84,6 +85,7 @@
     "startTime": "08:30:00",
     "endTime": "14:00:00",
     "location": "Rabat",
+    "amount": 5,
     "memberHuntings": {
       "1": [
         {
@@ -162,7 +164,8 @@
     "date": "2022-09-15",
     "startTime": "09:00:00",
     "endTime": "13:30:00",
-    "location": "Fes",
+    "location": "Tetouan",
+    "amount": 20,
     "memberHuntings": {
       "1": [
         {

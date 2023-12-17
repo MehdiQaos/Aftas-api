@@ -53,6 +53,9 @@ public class HuntingServiceImpl implements HuntingService {
         Fish fish = fishService.findById(huntingDto.getFishId())
                 .orElseThrow(() -> new ResourceNotFoundException("Fish not found"));
 
+        if (huntingDto.getWeight() < fish.getAverageWeight())
+            throw InvalidRequestException.of("weight", "fish weight is below average");
+
         Competition competition = ranking.getCompetition();
         LocalDateTime startDateTime = competition.getDate().atTime(competition.getStartTime());
         LocalDateTime endDateTime = competition.getDate().atTime(competition.getEndTime());

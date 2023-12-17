@@ -50,6 +50,7 @@ public class CompetitionServiceImpl implements CompetitionService {
         competition.setCode(code);
 
         validateCompetitionCreation(competition);
+        competition.setNumberOfParticipants(0);
         return competitionRepository.save(competition);
     }
 
@@ -128,6 +129,9 @@ public class CompetitionServiceImpl implements CompetitionService {
                 .build();
 
         validateRegistration(ranking);
+        competition.setNumberOfParticipants(
+                competition.getNumberOfParticipants() + 1);
+        save(competition);
         return rankingService.save(ranking);
     }
 
@@ -166,6 +170,7 @@ public class CompetitionServiceImpl implements CompetitionService {
         List<Competition> competitions = new ArrayList<>();
         competitionsDto.forEach(competitionDto -> {
             Competition competition = competitionDto.toCompetition();
+            competition.setNumberOfParticipants(0);
 
             Map<Integer, List<HuntingInitializationDto>> membersHuntings = competitionDto.getMemberHuntings();
             membersHuntings.forEach((memberId, huntingsList) -> {
@@ -184,6 +189,7 @@ public class CompetitionServiceImpl implements CompetitionService {
                     ranking.addHunting(hunting);
                 });
                 competition.addRanking(ranking);
+                competition.setNumberOfParticipants(membersHuntings.size());
             });
             competitions.add(competition);
         });

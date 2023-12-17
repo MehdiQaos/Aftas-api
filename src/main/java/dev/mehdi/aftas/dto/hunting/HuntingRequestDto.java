@@ -9,4 +9,5 @@ import lombok.Setter;
 public class HuntingRequestDto {
     private Long rankingId;
     private Long fishId;
+    private Float weight;
 }

@@ -24,6 +24,8 @@ public class CompetitionHuntingsDto {
 
     private String location;
 
+    private Float amount;
+
     private Map<Integer, List<HuntingInitializationDto>> memberHuntings;
 
     public Competition toCompetition() {
@@ -33,6 +35,7 @@ public class CompetitionHuntingsDto {
                 .startTime(startTime)
                 .endTime(endTime)
                 .location(location)
+                .amount(amount)
                 .build();
     }
 }

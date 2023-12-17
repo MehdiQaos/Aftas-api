@@ -17,20 +17,26 @@ public class CompetitionResponseDto {
 
     private LocalDate date;
 
+    private Integer numberOfParticipants;
+
     private LocalTime startTime;
 
     private LocalTime endTime;
 
     private String location;
 
+    private Float amount;
+
     public static CompetitionResponseDto from(Competition competition) {
         return new CompetitionResponseDto(
                 competition.getId(),
                 competition.getCode(),
                 competition.getDate(),
+                competition.getNumberOfParticipants(),
                 competition.getStartTime(),
                 competition.getEndTime(),
-                competition.getLocation()
+                competition.getLocation(),
+                competition.getAmount()
         );
     }
 }
