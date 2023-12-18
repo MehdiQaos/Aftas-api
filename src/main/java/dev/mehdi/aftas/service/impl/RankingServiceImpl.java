@@ -7,6 +7,7 @@ import dev.mehdi.aftas.service.RankingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -44,21 +45,34 @@ public class RankingServiceImpl implements RankingService {
     }
 
     @Override
-    public Integer updateMemberRank(Long rankingId) {
+    public Ranking updateMemberRank(Long rankingId) {
         Ranking ranking = findById(rankingId)
                 .orElseThrow(() -> new ResourceNotFoundException("Ranking not found"));
         return updateMemberRank(ranking);
     }
 
     @Override
-    public Integer updateMemberRank(Ranking ranking) {
+    public Ranking updateMemberRank(Ranking ranking) {
         int score = updateScore(ranking);
         Integer rank = ranking.getCompetition().getRankings().stream()
                 .filter(r -> updateScore(r) > score)
                 .mapToInt(r -> 1)
                 .sum() + 1;
         ranking.setMemberRank(rank);
-        save(ranking);
-        return rank;
+        ranking = save(ranking);
+        return ranking;
+    }
+
+    @Override
+    public List<Ranking> updateRankings(List<Ranking> rankings) {
+        return rankings.stream()
+                .map(this::updateMemberRank)
+                .toList();
+    }
+
+    @Override
+    public List<Ranking> getRankingsByCompetitionId(Long competitionId) {
+
+        return rankingRepository.findAllByCompetitionId(competitionId);
     }
 }

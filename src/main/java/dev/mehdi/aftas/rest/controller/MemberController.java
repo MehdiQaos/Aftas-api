@@ -47,7 +47,7 @@ public class MemberController {
         Page<Member> membersPage =
                 memberService.findAllWithPaginationAndSorting(pageable);
         Page<MemberResponseDto> membersResponseDtoPage =
-                membersPage.map(MemberResponseDto::fromMember);
+                membersPage.map(MemberResponseDto::fromModel);
 
         return ResponseEntity.ok().body(membersResponseDtoPage);
     }
@@ -57,14 +57,23 @@ public class MemberController {
         Member member = memberService.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Member not found")
         );
-        MemberResponseDto memberResponseDto = MemberResponseDto.fromMember(member);
+        MemberResponseDto memberResponseDto = MemberResponseDto.fromModel(member);
         return ResponseEntity.ok().body(memberResponseDto);
     }
 
     @PostMapping
     ResponseEntity<MemberResponseDto> create(@RequestBody @Valid MemberRequestDto memberDto) {
         Member createdMember = memberService.save(memberDto);
-        MemberResponseDto memberResponseDto = MemberResponseDto.fromMember(createdMember);
+        MemberResponseDto memberResponseDto = MemberResponseDto.fromModel(createdMember);
         return ResponseEntity.ok().body(memberResponseDto);
+    }
+
+    @GetMapping("search/{searchTerm}")
+    ResponseEntity<List<MemberResponseDto>> search(@PathVariable String searchTerm) {
+        List<Member> members = memberService.search(searchTerm);
+        List<MemberResponseDto> membersResponseDto =
+                members.stream().map(MemberResponseDto::fromModel).toList();
+
+        return ResponseEntity.ok().body(membersResponseDto);
     }
 }

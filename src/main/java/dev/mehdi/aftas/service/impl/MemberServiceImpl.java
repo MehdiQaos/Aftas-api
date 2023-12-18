@@ -9,11 +9,10 @@ import dev.mehdi.aftas.repository.MemberRepository;
 import dev.mehdi.aftas.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +34,13 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public Page<Member> findAllWithPaginationAndSorting(Pageable pageable) {
         return memberRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Member> findAllMembersByCompetitionId(
+            Long competitionId, Pageable pageable) {
+        return memberRepository
+                .findAllMembersByCompetitionId(competitionId, pageable);
     }
 
     @Override
@@ -97,5 +103,17 @@ public class MemberServiceImpl implements MemberService {
                 .toList();
 
         return saveAll(memberList);
+    }
+
+    @Override
+    public List<Member> search(String searchTerm) {
+        List<Member> members = new ArrayList<>();
+        try {
+            Long id = Long.parseLong(searchTerm);
+            memberRepository.findById(id).ifPresent(members::add);
+        } catch (NumberFormatException e) {
+            members = memberRepository.findByFirstNameContainingOrLastNameContaining(searchTerm, searchTerm);
+        }
+        return members;
     }
 }

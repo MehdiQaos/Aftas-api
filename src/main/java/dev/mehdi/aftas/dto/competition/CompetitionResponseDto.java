@@ -1,5 +1,6 @@
 package dev.mehdi.aftas.dto.competition;
 
+import dev.mehdi.aftas.domain.enums.CompetitionStatus;
 import dev.mehdi.aftas.domain.model.Competition;
 import lombok.*;
 
@@ -27,6 +28,8 @@ public class CompetitionResponseDto {
 
     private Float amount;
 
+    private CompetitionStatus status;
+
     public static CompetitionResponseDto from(Competition competition) {
         return new CompetitionResponseDto(
                 competition.getId(),
@@ -36,7 +39,8 @@ public class CompetitionResponseDto {
                 competition.getStartTime(),
                 competition.getEndTime(),
                 competition.getLocation(),
-                competition.getAmount()
+                competition.getAmount(),
+                CompetitionStatus.COMING
         );
     }
 }

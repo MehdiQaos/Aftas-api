@@ -1,9 +1,11 @@
 package dev.mehdi.aftas.service.impl;
 
+import dev.mehdi.aftas.domain.enums.CompetitionStatus;
 import dev.mehdi.aftas.domain.model.*;
 import dev.mehdi.aftas.dto.competition.CompetitionHuntingsDto;
 import dev.mehdi.aftas.dto.competition.CompetitionRequestDto;
 import dev.mehdi.aftas.dto.hunting.HuntingInitializationDto;
+import dev.mehdi.aftas.dto.member.MemberRankingDto;
 import dev.mehdi.aftas.exception.InvalidRequestException;
 import dev.mehdi.aftas.exception.ResourceExistException;
 import dev.mehdi.aftas.exception.ResourceNotFoundException;
@@ -18,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -55,7 +58,7 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     private String generateCompetitionCode(Competition competition) {
-        return competition.getLocation().substring(0, 3).toUpperCase() +
+        return competition.getLocation().substring(0, 3).toUpperCase() + "-" +
                 competition.getDate().format(competitionCodeDateFormatter);
     }
 
@@ -156,12 +159,10 @@ public class CompetitionServiceImpl implements CompetitionService {
     @Override
     public List<Competition> saveAll(List<Competition> competitions) {
         List<Competition> savedCompetitions = competitionRepository.saveAll(competitions);
-        savedCompetitions.forEach(competition -> {
-            competition.getRankings().forEach(ranking -> {
-                rankingService.updateScore(ranking);
-                rankingService.updateMemberRank(ranking);
-            });
-        });
+        savedCompetitions.forEach(competition -> competition.getRankings().forEach(ranking -> {
+            rankingService.updateScore(ranking);
+            rankingService.updateMemberRank(ranking);
+        }));
         return savedCompetitions;
     }
 
@@ -205,4 +206,49 @@ public class CompetitionServiceImpl implements CompetitionService {
         competitionRepository.delete(competition);
         return competition;
     }
+
+    @Override
+    public CompetitionStatus getCompetitionStatus(Competition competition) {
+        LocalDateTime dateTimeStart = competition.getDate().atTime(competition.getStartTime());
+        LocalDateTime dateTimeEnd = competition.getDate().atTime(competition.getEndTime());
+        LocalDateTime now = LocalDateTime.now();
+
+        if (now.isAfter(dateTimeEnd)) {
+            return CompetitionStatus.COMPLETED;
+        }
+        if (now.isAfter(dateTimeStart)) {
+            return CompetitionStatus.ACTIVE;
+        }
+        if (now.plusHours(24).isAfter(dateTimeStart)) {
+            return CompetitionStatus.REG_CLOSED;
+        }
+        return CompetitionStatus.COMING;
+    }
+    @Override
+    public Page<MemberRankingDto> findAllMembersByCompetitionId(
+            Long competitionId, Pageable pageable) {
+
+        Competition competition = findById(competitionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Competition not found with id: " + competitionId));
+
+        CompetitionStatus status = getCompetitionStatus(competition);
+        List<Ranking> rankings = competition.getRankings();
+        if (status == CompetitionStatus.COMPLETED ||
+                status == CompetitionStatus.ACTIVE) {
+            rankings = rankingService.updateRankings(rankings);
+        }
+        Map<Long, Ranking> rankingMap = rankings.stream()
+                .collect(Collectors.toMap(
+                        ranking -> ranking.getMember().getId(),
+                        ranking -> ranking
+                ));
+        Page<Member> allMembersByCompetitionId = memberService
+                .findAllMembersByCompetitionId(competition.getId(), pageable);
+        return allMembersByCompetitionId
+                .map(member -> {
+                    Ranking ranking = rankingMap.get(member.getId());
+                    return MemberRankingDto.fromModels(member, ranking);
+                });
+    }
+
 }

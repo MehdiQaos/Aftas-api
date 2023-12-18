@@ -2,38 +2,39 @@ package dev.mehdi.aftas.dto.member;
 
 import dev.mehdi.aftas.domain.enums.IdentityDocumentType;
 import dev.mehdi.aftas.domain.model.Member;
-import lombok.*;
+import dev.mehdi.aftas.domain.model.Ranking;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
+@Setter @Getter
 @AllArgsConstructor
-@NoArgsConstructor
-@Getter @Setter
-@Builder
-public class MemberResponseDto {
+public class MemberRankingDto {
     private Long id;
-
     private String firstName;
-
     private String lastName;
-
     private String identityNumber;
-
     private String nationality;
-
     private LocalDate birthDate;
-
     private IdentityDocumentType identityDocument;
+    private Integer score;
+    private Integer rank;
+    private Long competitionId;
 
-    public static MemberResponseDto fromModel(Member member) {
-        return new MemberResponseDto(
+    public static MemberRankingDto fromModels(Member member, Ranking ranking) {
+        return new MemberRankingDto(
                 member.getId(),
                 member.getFirstName(),
                 member.getLastName(),
                 member.getIdentityNumber(),
                 member.getNationality(),
                 member.getBirthDate(),
-                member.getIdentityDocument()
+                member.getIdentityDocument(),
+                ranking.getScore(),
+                ranking.getMemberRank(),
+                ranking.getCompetition().getId()
         );
     }
 }

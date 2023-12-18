@@ -12,10 +12,16 @@ public interface MemberService {
     Optional<Member> findById(Long id);
     List<Member> findAll();
     Page<Member> findAllWithPaginationAndSorting(Pageable pageable);
+
+    Page<Member> findAllMembersByCompetitionId(
+            Long competitionId, Pageable pageable);
+
     Optional<Member> findByIdentityNumberAndIdentityDocument(Member member);
     Optional<Member> findByFirstNameAndLastName(Member member);
     Member save(Member member);
     Member save(MemberRequestDto memberRequestDto);
     List<Member> saveAll(List<Member> members);
     List<Member> saveAllDto(List<MemberRequestDto> members);
+
+    List<Member> search(String searchTerm);
 }
