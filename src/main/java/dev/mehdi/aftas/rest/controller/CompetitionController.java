@@ -3,17 +3,13 @@ package dev.mehdi.aftas.rest.controller;
 import dev.mehdi.aftas.domain.enums.CompetitionStatus;
 import dev.mehdi.aftas.domain.model.Competition;
 import dev.mehdi.aftas.domain.model.Hunting;
-import dev.mehdi.aftas.domain.model.Member;
-import dev.mehdi.aftas.domain.model.Ranking;
 import dev.mehdi.aftas.dto.competition.CompetitionRequestDto;
 import dev.mehdi.aftas.dto.competition.CompetitionResponseDto;
 import dev.mehdi.aftas.dto.hunting.HuntingRequestDto;
 import dev.mehdi.aftas.dto.member.MemberRankingDto;
-import dev.mehdi.aftas.dto.member.MemberResponseDto;
 import dev.mehdi.aftas.exception.ResourceNotFoundException;
 import dev.mehdi.aftas.service.CompetitionService;
 import dev.mehdi.aftas.service.HuntingService;
-import dev.mehdi.aftas.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,13 +24,12 @@ import org.springframework.web.bind.annotation.*;
 public class CompetitionController {
 
     private final CompetitionService competitionService;
-    private final MemberService memberService;
     private final HuntingService huntingService;
 
     @GetMapping
-    ResponseEntity<Page<CompetitionResponseDto>> all(Pageable pageable) {
+    ResponseEntity<Page<CompetitionResponseDto>> all(Pageable pageable, @RequestParam(required = false, defaultValue = "ALL") String filter) {
         Page<Competition> competitionsPage =
-                competitionService.findAllWithPaginationAndSorting(pageable);
+                competitionService.findAllWithPaginationAndSortingAndFilter(pageable, filter);
         Page<CompetitionResponseDto> competitionsDtoPage =
             competitionsPage
                 .map(cmp -> {

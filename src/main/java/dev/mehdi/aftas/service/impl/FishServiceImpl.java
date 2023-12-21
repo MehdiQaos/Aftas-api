@@ -43,7 +43,7 @@ public class FishServiceImpl implements FishService {
     public Fish save(Fish fish) {
         String fishName = fish.getName();
 
-        if (findByName(fish.getName()).isPresent())
+        if (findByName(fishName).isPresent())
             throw new ResourceExistException("Fish by same name already exists");
 
         return fishRepository.save(fish);
@@ -61,7 +61,6 @@ public class FishServiceImpl implements FishService {
 
     @Override
     public List<Fish> saveAll(List<FishRequestDto> fishesDto) {
-        //TODO: check if fishs already exists
         List<Fish> fishes = fishesDto.stream()
                 .map(dto -> {
                     Fish fish = FishRequestDto.toFish(dto);

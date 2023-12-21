@@ -13,12 +13,14 @@ public class FishResponseDto {
     private Long id;
     private String name;
     private Float averageWeight;
+    private Long levelId;
 
     public static FishResponseDto fromModel(Fish fish) {
         return new FishResponseDto(
             fish.getId(),
             fish.getName(),
-            fish.getAverageWeight()
+            fish.getAverageWeight(),
+            fish.getLevel().getId()
         );
     }
 }

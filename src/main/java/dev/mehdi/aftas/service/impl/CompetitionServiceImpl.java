@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -43,8 +44,14 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public Page<Competition> findAllWithPaginationAndSorting(Pageable pageable) {
-        return competitionRepository.findAll(pageable);
+    public Page<Competition> findAllWithPaginationAndSortingAndFilter(Pageable pageable, String filter) {
+        return switch (filter) {
+            case "COMPLETED" -> competitionRepository.findAllByDateBefore(LocalDate.now(), pageable);
+            case "COMING" -> competitionRepository.findAllByDateAfter(LocalDate.now(), pageable);
+            case "ACTIVE" -> competitionRepository.findAllByDateEqualsAndStartTimeBeforeAndEndTimeAfter(
+                    LocalDate.now(), LocalTime.now(), LocalTime.now(), pageable);
+            default -> competitionRepository.findAll(pageable);
+        };
     }
 
     @Override
@@ -64,7 +71,7 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     private void validateCompetitionCreation(Competition competition) {
         if (competitionRepository.existsByDate(competition.getDate())) {
-            throw new ResourceExistException("Competition in this date already exists");
+            throw InvalidRequestException.of("date", "Competition in this date already exists");
         }
         validateCompetitionTime(competition);
     }
@@ -250,5 +257,4 @@ public class CompetitionServiceImpl implements CompetitionService {
                     return MemberRankingDto.fromModels(member, ranking);
                 });
     }
-
 }

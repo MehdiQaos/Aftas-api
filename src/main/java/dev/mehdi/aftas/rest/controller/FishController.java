@@ -21,16 +21,6 @@ import java.util.List;
 public class FishController {
     private final FishService fishService;
 
-//    @GetMapping
-//    ResponseEntity<List<FishResponseDto>> All() {
-//        List<FishResponseDto> fishResponseDto = fishService.findAll()
-//                .stream()
-//                .map(FishResponseDto::fromModel)
-//                .toList();
-//
-//        return ResponseEntity.ok().body(fishResponseDto);
-//    }
-
     @GetMapping
     ResponseEntity<Page<FishResponseDto>> All(Pageable pageable) {
         Page<Fish> fishesPage = fishService.findAllWithPaginationAndSorting(pageable);
