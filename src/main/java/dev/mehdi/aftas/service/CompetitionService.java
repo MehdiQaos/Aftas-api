@@ -14,10 +14,7 @@ import java.util.Optional;
 
 public interface CompetitionService {
     Optional<Competition> findById(Long id);
-    List<Competition> findAll();
-
     Page<Competition> findAllWithPaginationAndSortingAndFilter(Pageable pageable, String filter);
-
     Competition create(Competition competition);
     Competition create(CompetitionRequestDto competitionDto);
     Competition save(Competition competition);

@@ -161,9 +161,9 @@
   },
   {
     "code": "FES-22-09-15",
-    "date": "2022-09-15",
+    "date": "2023-12-22",
     "startTime": "09:00:00",
-    "endTime": "13:30:00",
+    "endTime": "23:30:00",
     "location": "Tetouan",
     "amount": 20,
     "memberHuntings": {

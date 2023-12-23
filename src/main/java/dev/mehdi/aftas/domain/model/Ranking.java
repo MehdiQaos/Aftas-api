@@ -12,17 +12,6 @@ import java.util.List;
 @Builder
 @Getter @Setter
 public class Ranking {
-//    @EmbeddedId
-//    private RankingId id;
-//
-//    @ManyToOne
-//    @MapsId("memberId")
-//    private Member member;
-//
-//    @ManyToOne
-//    @MapsId("competitionId")
-//    private Competition competition;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

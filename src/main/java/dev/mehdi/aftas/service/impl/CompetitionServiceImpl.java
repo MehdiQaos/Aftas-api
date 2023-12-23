@@ -39,11 +39,6 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public List<Competition> findAll() {
-        return competitionRepository.findAll();
-    }
-
-    @Override
     public Page<Competition> findAllWithPaginationAndSortingAndFilter(Pageable pageable, String filter) {
         return switch (filter) {
             case "COMPLETED" -> competitionRepository.findAllByDateBefore(LocalDate.now(), pageable);
