@@ -9,6 +9,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -23,6 +24,8 @@ public class FishInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         ClassPathResource resource = new ClassPathResource("seeders/fishes.json");
         FishRequestDto[] fishes = objectMapper.readValue(resource.getInputStream(), FishRequestDto[].class);
-        fishService.saveAll(List.of(fishes));
+        List<FishRequestDto> fishesDtos = Arrays.stream(fishes).filter(fish ->
+                        fishService.findByName(fish.getName()).isEmpty()).toList();
+        fishService.saveAll(fishesDtos);
     }
 }

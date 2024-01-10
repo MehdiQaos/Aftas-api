@@ -12,9 +12,7 @@ public class ErrorValidationResponse {
     private final String details;
     private final Map<String, String> errors;
 
-    public ErrorValidationResponse(String details
-            , Map<String, String> errors) {
-
+    public ErrorValidationResponse(String details , Map<String, String> errors) {
         this.details = details;
         this.errors = errors;
     }

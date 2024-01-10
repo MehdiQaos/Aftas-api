@@ -235,8 +235,7 @@ public class CompetitionServiceImpl implements CompetitionService {
 
         CompetitionStatus status = getCompetitionStatus(competition);
         List<Ranking> rankings = competition.getRankings();
-        if (status == CompetitionStatus.COMPLETED ||
-                status == CompetitionStatus.ACTIVE) {
+        if (status == CompetitionStatus.COMPLETED || status == CompetitionStatus.ACTIVE) {
             rankings = rankingService.updateRankings(rankings);
         }
         Map<Long, Ranking> rankingMap = rankings.stream()

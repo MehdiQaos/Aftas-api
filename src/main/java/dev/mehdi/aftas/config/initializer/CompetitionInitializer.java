@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-@Order(4)
+//@Component
+//@Order(4)
 @RequiredArgsConstructor
 public class CompetitionInitializer implements CommandLineRunner {
 
