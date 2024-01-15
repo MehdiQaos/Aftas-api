@@ -6,7 +6,7 @@ WORKDIR $BUILD_HOME
 
 COPY . .
 
-ENTRYPOINT [ "mvn", "clean", "package", "-DskipTests" ]
+RUN [ "mvn", "clean", "package", "-DskipTests" ]
 
 
 FROM openjdk:17-jdk-alpine3.14
