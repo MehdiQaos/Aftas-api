@@ -15,7 +15,4 @@ WORKDIR /app
 
 COPY --from=build /app/target/*.jar app.jar
 
-# COPY ./target/Aftas-0.0.1-SNAPSHOT.jar /app
-
-# ENTRYPOINT ["java", "-jar", "Aftas-0.0.1-SNAPSHOT.jar"]
 ENTRYPOINT ["java", "-jar", "app.jar"]
