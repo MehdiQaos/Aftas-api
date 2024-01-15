@@ -9,7 +9,7 @@ COPY . .
 RUN [ "mvn", "clean", "package", "-DskipTests" ]
 
 
-FROM openjdk:17-jdk-alpine3.14
+FROM bellsoft/liberica-openjre-alpine:17.0.9-11
 
 WORKDIR /app
 
