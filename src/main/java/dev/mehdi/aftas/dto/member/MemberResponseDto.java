@@ -16,6 +16,7 @@ public class MemberResponseDto {
     private String firstName;
 
     private String lastName;
+    private String email;
 
     private String identityNumber;
 
@@ -30,6 +31,7 @@ public class MemberResponseDto {
                 member.getId(),
                 member.getFirstName(),
                 member.getLastName(),
+                member.getEmail(),
                 member.getIdentityNumber(),
                 member.getNationality(),
                 member.getBirthDate(),

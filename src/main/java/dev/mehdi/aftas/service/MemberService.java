@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface MemberService {
     Optional<Member> findById(Long id);
     List<Member> findAll();
+    Optional<Member> getByEmail(String email);
     Page<Member> findAllWithPaginationAndSorting(Pageable pageable);
 
     Page<Member> findAllMembersByCompetitionId(

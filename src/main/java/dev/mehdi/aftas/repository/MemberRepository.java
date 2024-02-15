@@ -14,6 +14,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByIdentityNumberAndIdentityDocument(String identityNumber
             , IdentityDocumentType identityDocument);
     Optional<Member> findByFirstNameAndLastName(String firstName, String lastName);
+    Optional<Member> findByEmail(String email);
 
     @Query(
         "SELECT m FROM Member m " +

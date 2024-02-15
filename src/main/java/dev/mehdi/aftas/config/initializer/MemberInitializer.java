@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-//@Component
-//@Order(3)
+@Component
+@Order(4)
 @AllArgsConstructor
 public class MemberInitializer implements CommandLineRunner {
 

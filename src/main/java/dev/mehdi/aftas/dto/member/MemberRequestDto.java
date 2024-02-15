@@ -24,6 +24,13 @@ public class MemberRequestDto {
     @Size(max = 100, message = "Last name cannot be longer than 100 characters")
     private String lastName;
 
+    @NotBlank(message = "Email is required")
+    private String email;
+
+    @NotBlank(message = "Password is required")
+    @Size(min = 6, message = "Password must be at least 6 characters long")
+    private String password;
+
     @NotBlank(message = "Nationality is required")
     private String nationality;
 
@@ -43,6 +50,8 @@ public class MemberRequestDto {
         return Member.builder()
                 .firstName(firstName)
                 .lastName(lastName)
+                .email(email)
+                .password(password)
                 .nationality(nationality)
                 .identityNumber(identityNumber)
                 .identityDocument(identityDocumentType)

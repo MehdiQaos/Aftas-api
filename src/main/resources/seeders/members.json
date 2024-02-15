@@ -5,7 +5,9 @@
     "nationality": "USA",
     "birthDate": "1990-05-15",
     "identityNumber": "123456789",
-    "identityDocumentTypeId": 1
+    "identityDocumentTypeId": 1,
+    "email": "john.doe@example.com",
+    "password": "randompassword123"
   },
   {
     "firstName": "Alice",
@@ -13,7 +15,9 @@
     "nationality": "Canada",
     "birthDate": "1985-10-20",
     "identityNumber": "987654321",
-    "identityDocumentTypeId": 2
+    "identityDocumentTypeId": 2,
+    "email": "alice.smith@example.com",
+    "password": "randompassword456"
   },
   {
     "firstName": "Bob",
@@ -21,7 +25,9 @@
     "nationality": "UK",
     "birthDate": "1995-02-28",
     "identityNumber": "555666777",
-    "identityDocumentTypeId": 0
+    "identityDocumentTypeId": 0,
+    "email": "bob.johnson@example.com",
+    "password": "randompassword789"
   },
   {
     "firstName": "Emily",
@@ -29,7 +35,9 @@
     "nationality": "Australia",
     "birthDate": "1988-07-12",
     "identityNumber": "333444555",
-    "identityDocumentTypeId": 1
+    "identityDocumentTypeId": 1,
+    "email": "emily.brown@example.com",
+    "password": "randompassword987"
   },
   {
     "firstName": "Michael",
@@ -37,7 +45,9 @@
     "nationality": "New Zealand",
     "birthDate": "1992-03-05",
     "identityNumber": "111222333",
-    "identityDocumentTypeId": 2
+    "identityDocumentTypeId": 2,
+    "email": "michael.lee@example.com",
+    "password": "randompassword654"
   },
   {
     "firstName": "Sophia",
@@ -45,7 +55,9 @@
     "nationality": "France",
     "birthDate": "1993-09-18",
     "identityNumber": "789012345",
-    "identityDocumentTypeId": 0
+    "identityDocumentTypeId": 0,
+    "email": "sophia.miller@example.com",
+    "password": "randompassword321"
   },
   {
     "firstName": "Daniel",
@@ -53,7 +65,9 @@
     "nationality": "Spain",
     "birthDate": "1987-12-25",
     "identityNumber": "456789012",
-    "identityDocumentTypeId": 1
+    "identityDocumentTypeId": 1,
+    "email": "daniel.garcia@example.com",
+    "password": "randompassword876"
   },
   {
     "firstName": "Olivia",
@@ -61,7 +75,9 @@
     "nationality": "Germany",
     "birthDate": "1991-06-30",
     "identityNumber": "234567890",
-    "identityDocumentTypeId": 2
+    "identityDocumentTypeId": 2,
+    "email": "olivia.brown@example.com",
+    "password": "randompassword543"
   },
   {
     "firstName": "Ethan",
@@ -69,7 +85,9 @@
     "nationality": "China",
     "birthDate": "1989-04-08",
     "identityNumber": "901234567",
-    "identityDocumentTypeId": 0
+    "identityDocumentTypeId": 0,
+    "email": "ethan.wang@example.com",
+    "password": "randompassword210"
   },
   {
     "firstName": "Ava",
@@ -77,6 +95,8 @@
     "nationality": "South Korea",
     "birthDate": "1994-11-15",
     "identityNumber": "678901234",
-    "identityDocumentTypeId": 1
+    "identityDocumentTypeId": 1,
+    "email": "ava.kim@example.com",
+    "password": "randompassword789"
   }
 ]

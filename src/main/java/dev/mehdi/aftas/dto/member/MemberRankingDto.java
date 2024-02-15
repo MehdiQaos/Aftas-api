@@ -15,6 +15,7 @@ public class MemberRankingDto {
     private Long id;
     private String firstName;
     private String lastName;
+    private String email;
     private String identityNumber;
     private String nationality;
     private LocalDate birthDate;
@@ -28,6 +29,7 @@ public class MemberRankingDto {
                 member.getId(),
                 member.getFirstName(),
                 member.getLastName(),
+                member.getEmail(),
                 member.getIdentityNumber(),
                 member.getNationality(),
                 member.getBirthDate(),
