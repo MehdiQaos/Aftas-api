@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -56,6 +57,7 @@ public class CompetitionController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'JURY')")
     ResponseEntity<CompetitionResponseDto> create(
             @RequestBody @Valid CompetitionRequestDto competitionDto) {
 
@@ -78,6 +80,7 @@ public class CompetitionController {
     }
 
     @GetMapping("{competitionId}/{memberId}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'JURY')")
     ResponseEntity<Boolean> registerMember(
             @PathVariable Long competitionId, @PathVariable Long memberId
     ) {
@@ -87,6 +90,7 @@ public class CompetitionController {
     }
 
     @PostMapping("{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'JURY')")
     ResponseEntity<Integer> addHunting(@PathVariable Long id,
                                        @RequestBody @Valid HuntingRequestDto huntingDto) {
 
@@ -95,6 +99,7 @@ public class CompetitionController {
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     ResponseEntity<CompetitionResponseDto> delete(@PathVariable Long id) {
         Competition competition = competitionService.deleteById(id);
         CompetitionResponseDto competitionResponseDto =
@@ -105,6 +110,7 @@ public class CompetitionController {
     }
 
     @PutMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CompetitionResponseDto> update(@PathVariable Long id, @RequestBody @Valid CompetitionRequestDto competitionDto) {
         Competition updatedCompetition = competitionService.update(id, competitionDto);
         CompetitionResponseDto competitionResponseDto =

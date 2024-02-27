@@ -85,7 +85,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse refresh(HttpServletRequest request) {
-        final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        final String authHeader = request.getHeader("X-Refresh-Token");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             throw InvalidRequestException.of("Token", "Not provided");
         }
@@ -104,7 +104,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         tokenService.revokeAllTokens(member);
-        String jwtToken = jwtService.generateToken(member);
+        String jwtToken = createToken(member);
         return authenticationResponse(jwtToken, refreshToken);
     }
 

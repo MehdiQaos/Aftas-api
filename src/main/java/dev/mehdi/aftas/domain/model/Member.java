@@ -36,6 +36,8 @@ public class Member implements UserDetails {
 
     private String nationality;
 
+    private Boolean enabled;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
@@ -84,6 +86,6 @@ public class Member implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

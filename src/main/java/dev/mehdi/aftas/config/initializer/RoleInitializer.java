@@ -18,8 +18,10 @@ public class RoleInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Role admin = Role.builder().name(MemberRole.ADMIN).build();
         Role user = Role.builder().name(MemberRole.USER).build();
+        Role jury = Role.builder().name(MemberRole.JURY).build();
 
         roleService.createIfNotExist(admin);
         roleService.createIfNotExist(user);
+        roleService.createIfNotExist(jury);
     }
 }

@@ -1,5 +1,5 @@
 package dev.mehdi.aftas.domain.enums;
 
 public enum MemberRole {
-    ADMIN, USER
+    ADMIN, JURY, USER
 }

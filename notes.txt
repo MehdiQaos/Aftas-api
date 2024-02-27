@@ -1,0 +1,9 @@
+wrong credentials -> handeled, response: bad credentials, 500
+unauthorized -> handeled, response: Access denied, 500
+expired token -> unhandeled: ExpiredJwtException then AccessDeniedException: 403
+token modified signature -> unhandeled: SignatureException then AccessDeniedException: 403
+modied token header -> unhandeled: MalformedJwtException then AccessDeniedException: 403
+
+InvalidBearerTokenException
+AccountStatusException
+UsernameNotFoundException

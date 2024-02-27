@@ -2,10 +2,7 @@ package dev.mehdi.aftas.dto.member;
 
 import dev.mehdi.aftas.domain.enums.IdentityDocumentType;
 import dev.mehdi.aftas.domain.model.Member;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -56,6 +53,7 @@ public class MemberRequestDto {
                 .identityNumber(identityNumber)
                 .identityDocument(identityDocumentType)
                 .birthDate(birthDate)
+                .enabled(false)
                 .build();
     }
 }

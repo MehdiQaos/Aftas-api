@@ -95,9 +95,54 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public Member update(Member member) {
+        return memberRepository.save(member);
+    }
+
+    @Override
     public Member save(MemberRequestDto memberRequestDto) {
         validate(memberRequestDto);
         Member member = memberRequestDto.toMember();
+        member.setEnabled(false);
+        Role userRole = roleService.getByName(MemberRole.USER).orElseThrow(
+                () -> new ResourceNotFoundException("user role not found")
+        );
+        member.setRole(userRole);
+        return save(member);
+    }
+
+    @Override
+    public Member newAdmin(MemberRequestDto memberRequestDto) {
+        validate(memberRequestDto);
+        Member member = memberRequestDto.toMember();
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
+        member.setEnabled(true);
+        Role adminRole = roleService.getByName(MemberRole.ADMIN).orElseThrow(
+                () -> new ResourceNotFoundException("admin role not found")
+        );
+        member.setRole(adminRole);
+        return save(member);
+    }
+
+    @Override
+    public Member newJury(MemberRequestDto memberRequestDto) {
+        validate(memberRequestDto);
+        Member member = memberRequestDto.toMember();
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
+        member.setEnabled(false);
+        Role juryRole = roleService.getByName(MemberRole.JURY).orElseThrow(
+                () -> new ResourceNotFoundException("jury role not found")
+        );
+        member.setRole(juryRole);
+        return save(member);
+    }
+
+    @Override
+    public Member newUser(MemberRequestDto memberRequestDto) {
+        validate(memberRequestDto);
+        Member member = memberRequestDto.toMember();
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
+        member.setEnabled(false);
         Role userRole = roleService.getByName(MemberRole.USER).orElseThrow(
                 () -> new ResourceNotFoundException("user role not found")
         );

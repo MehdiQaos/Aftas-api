@@ -16,6 +16,7 @@ public class MemberResponseDto {
     private String firstName;
 
     private String lastName;
+
     private String email;
 
     private String identityNumber;
@@ -23,6 +24,8 @@ public class MemberResponseDto {
     private String nationality;
 
     private LocalDate birthDate;
+
+    private Boolean enabled;
 
     private IdentityDocumentType identityDocument;
 
@@ -35,6 +38,7 @@ public class MemberResponseDto {
                 member.getIdentityNumber(),
                 member.getNationality(),
                 member.getBirthDate(),
+                member.getEnabled(),
                 member.getIdentityDocument()
         );
     }

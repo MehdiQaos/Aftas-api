@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -38,6 +39,7 @@ public class FishController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'JURY')")
     ResponseEntity<FishResponseDto> create(@RequestBody @Valid FishRequestDto fishDto) {
         Fish createdFish = fishService.save(fishDto);
         FishResponseDto fishResponseDto = FishResponseDto.fromModel(createdFish);
@@ -45,6 +47,7 @@ public class FishController {
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'JURY')")
     ResponseEntity<FishResponseDto> delete(@PathVariable Long id) {
         Fish deletedFish = fishService.deleteById(id);
         FishResponseDto fishResponseDto = FishResponseDto.fromModel(deletedFish);
@@ -52,6 +55,7 @@ public class FishController {
     }
 
     @PutMapping("{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'JURY')")
     ResponseEntity<FishResponseDto> update(@PathVariable Long id,
             @RequestBody @Valid FishRequestDto fishDto) {
 

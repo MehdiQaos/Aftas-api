@@ -20,7 +20,17 @@ public interface MemberService {
     Optional<Member> findByIdentityNumberAndIdentityDocument(Member member);
     Optional<Member> findByFirstNameAndLastName(Member member);
     Member save(Member member);
+
+    Member update(Member member);
+
     Member save(MemberRequestDto memberRequestDto);
+
+    Member newAdmin(MemberRequestDto memberRequestDto);
+
+    Member newJury(MemberRequestDto memberRequestDto);
+
+    Member newUser(MemberRequestDto memberRequestDto);
+
     List<Member> saveAll(List<Member> members);
     List<Member> saveAllDto(List<MemberRequestDto> members);
 
